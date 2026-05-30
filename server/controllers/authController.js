@@ -2,6 +2,9 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/sendEmail');
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const ACCESS_TOKEN_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m';
 const REFRESH_TOKEN_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
@@ -212,10 +215,53 @@ const resetPassword = async (req, res) => {
   }
 };
 
+// @desc    Authenticate with Google
+// @route   POST /api/auth/google
+// @access  Public
+const googleLogin = async (req, res) => {
+  try {
+    const { token } = req.body;
+    
+    if (!token) {
+      return res.status(400).json({ message: 'Google token is required' });
+    }
+
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    
+    const payload = ticket.getPayload();
+    const { email, name, sub } = payload;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Auto register the user if they don't exist
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(sub, salt); // Use google sub as random password
+
+      user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        role: 'farmer',
+        phone: '0000000000', // Default phone since Google doesn't provide one
+      });
+    }
+
+    return res.json(buildAuthResponse(user));
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Failed to authenticate with Google' });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   refreshToken,
   forgotPassword,
   resetPassword,
+  googleLogin,
 };
