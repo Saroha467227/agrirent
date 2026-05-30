@@ -250,7 +250,7 @@ const Equipment = () => {
                     {/* Image */}
                     <div className={`relative bg-slate-100 ${viewMode === 'list' ? 'w-full sm:w-64 shrink-0' : 'w-full aspect-[4/3]'}`}>
                       <img 
-                        src={item.images && item.images.length > 0 ? item.images[0] : '/images/tractor.png'} 
+                        src={item.images && item.images.length > 0 ? item.images[0] : `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none"><rect width="200" height="200" rx="16" fill="%230f172a"/><text x="100" y="108" text-anchor="middle" fill="%2334d399" font-size="14" font-family="sans-serif">No Image</text></svg>')}`} 
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

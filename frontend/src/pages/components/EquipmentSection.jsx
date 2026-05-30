@@ -60,8 +60,8 @@ const EquipmentSection = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group glass rounded-2xl border border-white/5 overflow-hidden hover:border-emerald-500/30 transition-colors flex flex-col"
             >
-              {/* Image Container with Tilt Effect */}
-              <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 overflow-hidden">
+              {/* Header with Category Icon */}
+              <div className="relative aspect-[5/3] bg-gradient-to-br from-emerald-500/10 via-slate-800/50 to-slate-900/50 p-6 overflow-hidden flex items-center justify-center">
                 <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10 z-10">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   <span className="text-xs font-bold text-white">{item.rating || '4.9'}</span>
@@ -81,11 +81,12 @@ const EquipmentSection = () => {
                   )}
                 </div>
 
-                <img 
-                  src={item.images && item.images.length > 0 ? item.images[0] : '/images/tractor.png'} 
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-90 group-hover:brightness-110"
-                />
+                {/* Category Icon */}
+                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25m-2.25 0h-2.25m0 0V5.625c0-.621.504-1.125 1.125-1.125h3.026a2.999 2.999 0 012.287 1.059l1.838 2.174" />
+                  </svg>
+                </div>
               </div>
 
               {/* Content */}

@@ -166,7 +166,7 @@ const Checkout = () => {
               <div className="flex gap-4 mb-6">
                 <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-slate-100">
                   <img 
-                    src={equipment?.images?.[0] || '/images/tractor.png'} 
+                    src={equipment?.images?.[0] || `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none"><rect width="200" height="200" rx="16" fill="%230f172a"/><text x="100" y="108" text-anchor="middle" fill="%2334d399" font-size="14" font-family="sans-serif">No Image</text></svg>')}`} 
                     alt={equipment?.title}
                     className="w-full h-full object-cover"
                   />

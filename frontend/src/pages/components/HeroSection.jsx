@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, ShieldCheck, Zap, Users, Star, StarHalf, MapPin } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShieldCheck, Zap, Users, MapPin } from 'lucide-react';
 import { locationData } from '../../utils/locationData';
 
 const fadeIn = {
@@ -52,10 +52,10 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="flex flex-col items-center text-center">
           
-          {/* Left Content */}
-          <div className="text-left pt-10 lg:pt-0">
+          {/* Hero Content */}
+          <div className="pt-10 lg:pt-0 max-w-4xl">
             <motion.div
               custom={0}
               initial="hidden"
@@ -87,7 +87,7 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
               variants={fadeIn}
-              className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed"
+              className="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed"
             >
               The premium marketplace connecting farmers with top-tier equipment owners. 
               Transparent pricing, secure payments, and verified machinery.
@@ -98,12 +98,12 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
               variants={fadeIn}
-              className="mt-10"
+              className="mt-10 w-full max-w-2xl mx-auto"
             >
               <form 
                 action="/equipment" 
                 method="GET"
-                className="flex flex-col gap-2 p-2 rounded-2xl glass border border-emerald-500/20 bg-slate-900/50 backdrop-blur-md max-w-2xl"
+                className="flex flex-col gap-2 p-2 rounded-2xl glass border border-emerald-500/20 bg-slate-900/50 backdrop-blur-md"
               >
                 <div className="flex items-center px-4 py-2 w-full">
                   <div className="w-5 h-5 text-emerald-400 shrink-0">
@@ -183,7 +183,7 @@ const HeroSection = () => {
               initial="hidden"
               animate="visible"
               variants={fadeIn}
-              className="mt-12 flex items-center gap-6 text-sm font-medium text-slate-400"
+              className="mt-12 flex items-center justify-center gap-6 text-sm font-medium text-slate-400"
             >
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-emerald-400" />
@@ -196,47 +196,6 @@ const HeroSection = () => {
               <div className="hidden sm:flex items-center gap-2">
                 <Users className="w-5 h-5 text-emerald-400" />
                 10k+ Farmers
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Content - Floating Cards */}
-          <div className="relative h-[500px] hidden lg:block">
-            <motion.div
-              style={{ y: useTransform(scrollY, [0, 500], [0, -50]) }}
-              className="absolute top-10 right-0 w-[340px] glass rounded-3xl p-4 shadow-2xl border-white/10 animate-float-slow z-20"
-            >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-slate-900/50">
-                <img src="/images/tractor.png" alt="Premium Tractor" className="w-full h-full object-contain p-4 drop-shadow-2xl hover:scale-110 transition-transform duration-700" />
-              </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="font-bold text-white text-lg">John Deere 5050D</h3>
-                  <p className="text-emerald-400 font-semibold mt-1">₹1,200 <span className="text-slate-400 text-sm font-normal">/ day</span></p>
-                </div>
-                <div className="flex items-center gap-1 bg-white/10 px-2 py-1 rounded-lg">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-xs font-bold text-white">4.9</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              style={{ y: useTransform(scrollY, [0, 500], [0, 80]) }}
-              className="absolute bottom-10 left-0 w-[300px] glass rounded-3xl p-4 shadow-2xl border-white/10 animate-float z-10"
-            >
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-slate-900/50">
-                <img src="/images/harvester.png" alt="Combine Harvester" className="w-full h-full object-contain p-4 drop-shadow-2xl hover:scale-110 transition-transform duration-700" />
-              </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="font-bold text-white text-base">Mahindra Arjun 605</h3>
-                  <p className="text-emerald-400 font-semibold mt-1">₹3,500 <span className="text-slate-400 text-sm font-normal">/ day</span></p>
-                </div>
-                <div className="flex items-center gap-1 bg-white/10 px-2 py-1 rounded-lg">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-xs font-bold text-white">4.8</span>
-                </div>
               </div>
             </motion.div>
           </div>
